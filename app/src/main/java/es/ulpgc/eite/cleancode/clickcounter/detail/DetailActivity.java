@@ -72,8 +72,8 @@ public class DetailActivity
     //Log.e(TAG, "onDataUpdated()");
 
     // deal with the data
-    ((TextView) findViewById(R.id.counter)).setText(viewModel.counter);
-    ((TextView) findViewById(R.id.clicks)).setText(viewModel.clicks);
+    ((TextView) findViewById(R.id.counter)).setText(String.valueOf(viewModel.counter));
+    ((TextView) findViewById(R.id.clicks)).setText(String.valueOf(viewModel.clicks));
   }
 
   @Override

@@ -41,7 +41,7 @@ public class DetailModel implements DetailContract.Model {
   @Override
   public void onDataFromPreviousScreen(MasterToDetailState masterToDetailState) {
     // Log.e(TAG, "onDataFromPreviousScreen()");
-    this.counter = masterToDetailState.counter +1 ;
-    this.clicks = masterToDetailState.clicks +1;
+    this.counter = masterToDetailState.counter ;
+    this.clicks = masterToDetailState.clicks;
   }
 }

@@ -1,9 +1,11 @@
 package es.ulpgc.eite.cleancode.clickcounter.app;
 
+import android.app.Application;
+
 import es.ulpgc.eite.cleancode.clickcounter.detail.DetailState;
 import es.ulpgc.eite.cleancode.clickcounter.master.MasterState;
 
-public class AppMediator  {
+public class AppMediator extends Application {
 
   private static AppMediator instance;
 
@@ -13,7 +15,9 @@ public class AppMediator  {
   private DetailToMasterState detailToMasterState;
   private MasterToDetailState masterToDetailState;
 
-  private AppMediator() {
+  @Override
+  public void onCreate() {
+    super.onCreate();
     detailState= new DetailState();
     masterState= new MasterState();
 

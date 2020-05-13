@@ -88,6 +88,7 @@ public class MasterPresenter implements MasterContract.Presenter {
 
   @Override
   public void onDataClicked(CounterData data) {
+    state.clicks++;
     for(int i = 0; i< state.datasource.size(); i++){
       if(state.datasource.get(i).id.intValue() == data.id.intValue()){
         state.posicion = i;
@@ -97,6 +98,7 @@ public class MasterPresenter implements MasterContract.Presenter {
     MasterToDetailState masterToDetailState= new MasterToDetailState();
     masterToDetailState.clicks = state.clicks;
     masterToDetailState.counter = state.counter;
+    router.passStateToNextScreen(masterToDetailState);
     view.get().navigateToNextScreen();
   }
 

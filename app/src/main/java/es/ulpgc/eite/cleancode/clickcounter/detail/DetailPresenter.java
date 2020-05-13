@@ -1,7 +1,10 @@
 package es.ulpgc.eite.cleancode.clickcounter.detail;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
+import es.ulpgc.eite.cleancode.clickcounter.app.DetailToMasterState;
 import es.ulpgc.eite.cleancode.clickcounter.app.MasterToDetailState;
 
 public class DetailPresenter implements DetailContract.Presenter {
@@ -59,6 +62,10 @@ public class DetailPresenter implements DetailContract.Presenter {
 
   @Override
   public void onBackPressed() {
+    DetailToMasterState detailToMasterState = new DetailToMasterState();
+    detailToMasterState.clicks = state.clicks;
+    detailToMasterState.counter = state.counter;
+    router.passStateToPreviousScreen(detailToMasterState);
     // Log.e(TAG, "onBackPressed()");
   }
 
@@ -74,6 +81,9 @@ public class DetailPresenter implements DetailContract.Presenter {
 
   @Override
   public void onButtonPressed() {
+    state.clicks++;
+    state.counter++;
+    view.get().onDataUpdated(state);
     // Log.e(TAG, "onButtonPressed()");
   }
 
