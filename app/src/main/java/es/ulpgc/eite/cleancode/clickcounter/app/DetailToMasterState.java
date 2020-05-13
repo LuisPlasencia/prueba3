@@ -2,5 +2,6 @@ package es.ulpgc.eite.cleancode.clickcounter.app;
 
 public class DetailToMasterState {
 
-  public String data;
+  public int counter;
+  public int clicks;
 }

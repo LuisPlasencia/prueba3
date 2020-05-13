@@ -2,6 +2,7 @@ package es.ulpgc.eite.cleancode.clickcounter.master;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -85,6 +86,7 @@ public class MasterActivity
           @Override
           public void onClick(View view) {
             CounterData data = (CounterData) view.getTag();
+            presenter.onDataClicked(data);
 
           }
         })
@@ -93,8 +95,8 @@ public class MasterActivity
 
   @Override
   public void navigateToNextScreen() {
-    Intent intent = new Intent(this, MasterActivity.class);
-    startActivity(intent);
+//    Intent intent = new Intent(this, MasterActivity.class);
+//    startActivity(intent);
   }
 
 

@@ -3,6 +3,8 @@ package es.ulpgc.eite.cleancode.clickcounter.master;
 import java.lang.ref.WeakReference;
 
 import es.ulpgc.eite.cleancode.clickcounter.app.DetailToMasterState;
+import es.ulpgc.eite.cleancode.clickcounter.app.MasterToDetailState;
+import es.ulpgc.eite.cleancode.clickcounter.data.CounterData;
 
 public class MasterPresenter implements MasterContract.Presenter {
 
@@ -45,11 +47,16 @@ public class MasterPresenter implements MasterContract.Presenter {
     if (savedState != null) {
 
       // update the model if is necessary
-      model.onDataFromNextScreen(savedState.data);
+      model.onDataFromNextScreen(savedState.counter, savedState.clicks);
     }
 
     // call the model and update the state
-    state.datasource = model.getStoredData();
+    state.counter = model.getStoredCounter();
+    state.clicks = model.getStoredClicks();
+
+    if(state.datasource.size() != 0){
+      state.datasource.get(state.posicion).value = state.counter;
+    }
 
     // update the view
     view.get().onDataUpdated(state);
@@ -74,6 +81,23 @@ public class MasterPresenter implements MasterContract.Presenter {
   @Override
   public void onButtonPressed() {
     // Log.e(TAG, "onButtonPressed()");
+    CounterData counterData = new CounterData();
+    state.datasource.add(counterData);
+    view.get().onDataUpdated(state);
+  }
+
+  @Override
+  public void onDataClicked(CounterData data) {
+    for(int i = 0; i< state.datasource.size(); i++){
+      if(state.datasource.get(i).id.intValue() == data.id.intValue()){
+        state.posicion = i;
+      }
+    }
+    state.counter = data.value;
+    MasterToDetailState masterToDetailState= new MasterToDetailState();
+    masterToDetailState.clicks = state.clicks;
+    masterToDetailState.counter = state.counter;
+    view.get().navigateToNextScreen();
   }
 
   @Override

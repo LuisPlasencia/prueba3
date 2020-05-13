@@ -37,16 +37,24 @@ public interface MasterContract {
     void onDestroy();
 
     void onButtonPressed();
+
+      void onDataClicked(CounterData data);
   }
 
   interface Model {
     List<CounterData> getStoredData();
 
-    void onDataFromNextScreen(String data);
+    int getStoredClicks();
+
+    int getStoredCounter();
+
+    void onDataFromNextScreen(int counter, int clicks);
 
     void onRestartScreen(List<CounterData> datasource);
 
-    void onDataFromPreviousScreen(String data);
+    void onDataFromPreviousScreen(int counter, int clicks);
+
+
   }
 
   interface Router {

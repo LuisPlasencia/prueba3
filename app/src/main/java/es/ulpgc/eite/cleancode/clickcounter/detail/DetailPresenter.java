@@ -31,7 +31,7 @@ public class DetailPresenter implements DetailContract.Presenter {
     if (savedState != null) {
 
       // update the model if is necessary
-      model.onDataFromPreviousScreen(savedState.data);
+      model.onDataFromPreviousScreen(savedState);
     }
   }
 
@@ -40,7 +40,8 @@ public class DetailPresenter implements DetailContract.Presenter {
     // Log.e(TAG, "onRestart()");
 
     // update the model if is necessary
-    model.onRestartScreen(state.data);
+    model.onRestartScreenClicks(state.clicks);
+    model.onRestartScreenCounter(state.counter);
   }
 
   @Override
@@ -48,7 +49,8 @@ public class DetailPresenter implements DetailContract.Presenter {
     // Log.e(TAG, "onResume()");
 
     // call the model and update the state
-    state.data = model.getStoredData();
+    state.clicks = model.getStoredClicks();
+    state.counter = model.getStoredCounter();
 
     // update the view
     view.get().onDataUpdated(state);
